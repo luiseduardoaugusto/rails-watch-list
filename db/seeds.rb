@@ -8,6 +8,9 @@
 require 'open-uri'
 require 'json'
 
+Movie.destroy_all 
+List.destroy_all
+
 movies = URI.open("http://tmdb.lewagon.com/movie/top_rated").read
 
 movies = JSON.parse(movies)
@@ -16,8 +19,14 @@ movies["results"].each do |movie|
     pelicula = Movie.new
     pelicula.title =           movie["original_title"]
     pelicula.overview =        movie["overview"]
-    pelicula.poster_url =     movie["poster_path"]
+    pelicula.poster_url =     "https://image.tmdb.org/t/p/w500#{movie["poster_path"]}"
     pelicula.rating =           movie["vote_average"]
     pelicula.save
   end
 end
+
+
+List.create!( name: "drama")
+List.create!( name: "accion")
+List.create!( name: "comedia")
+List.create!( name: "suspenso")

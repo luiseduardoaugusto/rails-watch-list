@@ -56,3 +56,5 @@ gem 'simple_form'
 
 gem 'open-uri'
 gem 'json'
+
+gem 'cloudinary', '~> 1.16.0'
